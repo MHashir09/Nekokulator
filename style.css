@@ -1,0 +1,100 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#cal-body {
+  width: 30%;
+  outline: 2px solid black;
+  border-radius: 18px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.screen {
+  padding: 40px 16px 12px 0;
+  display: flex;
+  justify-content: right;
+  outline: 2px solid black;
+  border-radius: 12px;
+}
+
+.operators {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.box1 {
+  width: 100%;
+  display: flex;
+  gap: 16px;
+}
+
+.box1 button {
+  all: unset;
+  background-color: black;
+  color: white;
+  padding: 18px;
+  border-radius: 50%;
+  font-size: 12px;
+  cursor: pointer;
+  text-align: center;
+  aspect-ratio: 1/1;
+}
+
+.box2 {
+  width: 100%;
+  display: flex;
+  margin-top: 20px;
+}
+
+.number-btns {
+  display: flex;
+  width: 75%;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.number-btns button {
+  all: unset;
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+  cursor: pointer;
+  width: calc(100%/3 - 16px);
+  text-align: center;
+  aspect-ratio: 1/1;
+}
+
+.side-btns {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.side-btns button{
+  all: unset;
+  background-color: black;
+  color: white;
+  padding: 14px;
+  border-radius: 50%;
+  font-size: 12px;
+  cursor: pointer;
+  width: 28%;
+  text-align: center;
+}

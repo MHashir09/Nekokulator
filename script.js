@@ -27,23 +27,15 @@ function findRatio(num1, num2) {
 
 function handleNumbers(button) {
   var buttonContent = button.textContent;
-  if (leftOperandNegated == '' || rightOperandNegated == '') {
-    if (operatorFlag == 0) {
-      calcScreen.textContent += buttonContent;
-      leftOperand += buttonContent;
-    } else {
-      calcScreen.textContent += ' ' + buttonContent;
-      rightOperand += buttonContent;
-    }
-  } else {
     if (operatorFlag == 0) {
       calcScreen.textContent += buttonContent;
       leftOperand += `${leftOperandNegated}${buttonContent}`;
+      leftOperandNegated = '';
     } else {
       calcScreen.textContent += buttonContent;
       rightOperand += `${rightOperandNegated}${buttonContent}`;
+      rightOperandNegated = '';
     }
-  }
 }
 
 function handleOperators(button) {
@@ -68,14 +60,10 @@ function handleSpecialButtons(button) {
     operate();
     leftOperand = '';
     rightOperand = '';
-    leftOperandNegated = '';
-    rightOperandNegated = '';
     operatorFlag = 0;
   } else if (buttonContent == 'AC') {
     leftOperand = '';
     rightOperand = '';
-    leftOperandNegated = '';
-    rightOperandNegated = '';
     operatorFlag = 0;
     calcScreen.textContent = '';
   }

@@ -1,128 +1,145 @@
 const calcBody = document.querySelector("#cal-body");
 const calcScreen = document.querySelector(".screen");
 
-let leftOperand = '';
-let leftOperandNegated = '';
+let leftOperand = "";
 let operator = "";
-let rightOperand = '';
-let rightOperandNegated = '';
-let operatorFlag = 0;
-let result = 0;
+let rightOperand = "";
+let result = "";
+let sciMode = false;
+let errorState = false; // NEW: prevents typing after "SYNTAX ERROR"
 
-calcBody.addEventListener("click", handleEventListeners);
+// ✅ Math operations
+function operate() {
+  const num1 = parseFloat(leftOperand);
+  const num2 = parseFloat(rightOperand);
 
-function findSum(num1, num2) {
-  return +num1 + +num2;
+  if (isNaN(num1) || isNaN(num2)) {
+    calcScreen.textContent = "SYNTAX ERROR";
+    errorState = true;
+    return;
+  }
+
+  switch (operator) {
+    case "+":
+      result = num1 + num2;
+      break;
+    case "-":
+      result = num1 - num2;
+      break;
+    case "x":
+      result = num1 * num2;
+      break;
+    case "/":
+      result = num2 === 0 ? "SYNTAX ERROR" : num1 / num2;
+      if (result === "SYNTAX ERROR") errorState = true;
+      break;
+    default:
+      result = "SYNTAX ERROR";
+      errorState = true;
+  }
+
+  calcScreen.textContent = result;
+  leftOperand = result.toString();
+  rightOperand = "";
+  operator = "";
 }
 
-function findDifference(num1, num2) {
-  return +num1 - +num2;
-}
-function findProduct(num1, num2) {
-  return +num1 * +num2;
-}
-function findRatio(num1, num2) {
-  return +num1 / +num2;
-}
-
+// ✅ Handle numbers
 function handleNumbers(button) {
-  var buttonContent = button.textContent;
-  if (leftOperandNegated == '' || rightOperandNegated == '') {
-    if (operatorFlag == 0) {
-      calcScreen.textContent += buttonContent;
-      leftOperand += buttonContent;
-    } else {
-      calcScreen.textContent += ' ' + buttonContent;
-      rightOperand += buttonContent;
-    }
+  if (errorState) return; // prevent typing after error
+
+  const value = button.textContent;
+
+  if (!operator) {
+    leftOperand += value;
+    calcScreen.textContent = leftOperand;
   } else {
-    if (operatorFlag == 0) {
-      calcScreen.textContent += buttonContent;
-      leftOperand += `${leftOperandNegated}${buttonContent}`;
+    rightOperand += value;
+    calcScreen.textContent = `${leftOperand} ${operator} ${rightOperand}`;
+  }
+}
+
+// ✅ Handle operators
+function handleOperators(button) {
+  if (errorState) return;
+
+  const value = button.textContent;
+
+  // Allow negative number at start
+  if (!leftOperand && value === "-") {
+    leftOperand = "-";
+    calcScreen.textContent = leftOperand;
+    return;
+  }
+
+  // Allow negative right operand
+  if (operator && !rightOperand && value === "-") {
+    rightOperand = "-";
+    calcScreen.textContent = `${leftOperand} ${operator} ${rightOperand}`;
+    return;
+  }
+
+  if (leftOperand) {
+    operator = value;
+    calcScreen.textContent = `${leftOperand} ${operator}`;
+  }
+}
+
+// ✅ Handle special buttons
+function handleSpecialButtons(button) {
+  const value = button.textContent;
+
+  if (value === "AC") {
+    leftOperand = "";
+    rightOperand = "";
+    operator = "";
+    result = "";
+    errorState = false;
+    calcScreen.textContent = "";
+  }
+
+  if (value === "DEL") {
+    if (errorState) return; // can’t delete error
+    if (rightOperand) {
+      rightOperand = rightOperand.slice(0, -1);
+      calcScreen.textContent = `${leftOperand} ${operator} ${rightOperand}`;
+    } else if (operator) {
+      operator = "";
+      calcScreen.textContent = leftOperand;
     } else {
-      calcScreen.textContent += buttonContent;
-      rightOperand += `${rightOperandNegated}${buttonContent}`;
+      leftOperand = leftOperand.slice(0, -1);
+      calcScreen.textContent = leftOperand;
     }
   }
-}
 
-function handleOperators(button) {
-  var buttonContent = button.textContent;
-  if (operatorFlag == 0 && leftOperand == '') {
-    calcScreen.textContent += buttonContent;
-    leftOperandNegated = buttonContent;
-  } else if (operatorFlag == 1) {
-    calcScreen.textContent += ' ' + buttonContent;
-    rightOperandNegated = buttonContent;
-  } else if (operatorFlag == 0) {
-    calcScreen.textContent += ' ' + buttonContent;
-    operator = buttonContent;
-    operatorFlag = 1;
+  if (value === "SCI") {
+    sciMode = !sciMode;
+    calcScreen.textContent = sciMode
+      ? "SCI MODE ON (sin, cos, tan...)"
+      : "";
   }
 }
 
-function handleSpecialButtons(button) {
-  var buttonContent = button.textContent;
-  if (buttonContent == '=') {
-    calcScreen.textContent = '';
+// ✅ Handle equals
+function handleEquals() {
+  if (errorState) return;
+  if (leftOperand && operator && rightOperand) {
     operate();
-    leftOperand = '';
-    rightOperand = '';
-    leftOperandNegated = '';
-    rightOperandNegated = '';
-    operatorFlag = 0;
-  } else if (buttonContent == 'AC') {
-    leftOperand = '';
-    rightOperand = '';
-    leftOperandNegated = '';
-    rightOperandNegated = '';
-    operatorFlag = 0;
-    calcScreen.textContent = '';
   }
 }
 
-function handleEventListeners(event) {
+// ✅ Event Listener
+calcBody.addEventListener("click", (event) => {
   const button = event.target;
   if (!button.matches("button")) return;
 
-  if (button.classList.contains('numbers')) {
+  if (button.classList.contains("numbers")) {
     handleNumbers(button);
-  } else if (button.classList.contains('operators')) {
-    if (leftOperand == '') {
-      if (button.textContent == '-') {
-        handleOperators(button);
-      }
-    } else if (operatorFlag == 1 )  {
-      if (button.textContent == '-') {
-        handleOperators(button);
-      }
-    } else if (operatorFlag == 0) {
-        handleOperators(button);
-    }
+  } else if (button.classList.contains("operators")) {
+    handleOperators(button);
+  } else if (button.classList.contains("equals-button")) {
+    handleEquals();
   } else {
     handleSpecialButtons(button);
   }
-}
-
-function operate() {
-  if (leftOperand != '' && rightOperand != '') {
-    switch (operator) {
-      case '+':
-        result = findSum(leftOperand, rightOperand);
-        break;
-      case '-':
-        result = findDifference(leftOperand, rightOperand);
-        break;
-      case 'x':
-        result = findProduct(leftOperand, rightOperand);
-        break;
-      case '/':
-        result = findRatio(leftOperand, rightOperand);
-        break;
-    }
-    calcScreen.textContent = result;
-  } else {
-    calcScreen.textContent = 'SYNTAX ERROR';
-  }
-  return;
-}
+});

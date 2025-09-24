@@ -8,7 +8,7 @@ let result = "";
 let sciMode = false;
 let errorState = false; // NEW: prevents typing after "SYNTAX ERROR"
 
-// ✅ Math operations
+//  Math operations
 function operate() {
   const num1 = parseFloat(leftOperand);
   const num2 = parseFloat(rightOperand);
@@ -44,7 +44,7 @@ function operate() {
   operator = "";
 }
 
-// ✅ Handle numbers
+//  Handle numbers
 function handleNumbers(button) {
   if (errorState) return; // prevent typing after error
 
@@ -59,7 +59,7 @@ function handleNumbers(button) {
   }
 }
 
-// ✅ Handle operators
+//  Handle operators
 function handleOperators(button) {
   if (errorState) return;
 
@@ -85,7 +85,7 @@ function handleOperators(button) {
   }
 }
 
-// ✅ Handle special buttons
+//  Handle special buttons
 function handleSpecialButtons(button) {
   const value = button.textContent;
 
@@ -120,7 +120,7 @@ function handleSpecialButtons(button) {
   }
 }
 
-// ✅ Handle equals
+//  Handle equals
 function handleEquals() {
   if (errorState) return;
   if (leftOperand && operator && rightOperand) {
@@ -128,7 +128,7 @@ function handleEquals() {
   }
 }
 
-// ✅ Event Listener
+//  Event Listener
 calcBody.addEventListener("click", (event) => {
   const button = event.target;
   if (!button.matches("button")) return;

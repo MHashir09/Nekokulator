@@ -1,13 +1,11 @@
 const calcBody = document.querySelector("#cal-body");
 const calcScreen = document.querySelector(".screen");
 
-let leftOperand = '';
-let leftOperandNegated = '';
-let operator = "";
-let rightOperand = '';
-let rightOperandNegated = '';
-let operatorFlag = 0;
-let result = 0;
+let currentNumber = "";
+let pendingOperator = "";
+let accumulator = null;
+let unaryFlag = false;
+let resultFlag = false;
 
 calcBody.addEventListener("click", handleEventListeners);
 
@@ -18,54 +16,74 @@ function findSum(num1, num2) {
 function findDifference(num1, num2) {
   return +num1 - +num2;
 }
+
 function findProduct(num1, num2) {
   return +num1 * +num2;
 }
+
 function findRatio(num1, num2) {
   return +num1 / +num2;
 }
 
 function handleNumbers(button) {
-  var buttonContent = button.textContent;
-    if (operatorFlag == 0) {
-      calcScreen.textContent += buttonContent;
-      leftOperand += `${leftOperandNegated}${buttonContent}`;
-      leftOperandNegated = '';
-    } else {
-      calcScreen.textContent += buttonContent;
-      rightOperand += `${rightOperandNegated}${buttonContent}`;
-      rightOperandNegated = '';
-    }
+  const newNumber = button.textContent;
+
+  if (resultFlag == true) {
+    calcScreen.textContent = ''; // to clear the screen if user clicks any number
+    resultFlag = false;
+  }
+
+  if (newNumber == '.' && currentNumber.includes('.')) return;
+
+  currentNumber += newNumber;
+  calcScreen.textContent += newNumber;
 }
 
 function handleOperators(button) {
-  var buttonContent = button.textContent;
-  if (operatorFlag == 0 && leftOperand == '') {
-    calcScreen.textContent += buttonContent;
-    leftOperandNegated = buttonContent;
-  } else if (operatorFlag == 1) {
-    calcScreen.textContent += ' ' + buttonContent;
-    rightOperandNegated = buttonContent;
-  } else if (operatorFlag == 0) {
-    calcScreen.textContent += ' ' + buttonContent;
-    operator = buttonContent;
-    operatorFlag = 1;
+  const newOperator = button.textContent;
+
+  if (currentNumber == "" && unaryFlag == false) {
+    if (newOperator == '-' || newOperator == '+') {
+    currentNumber += newOperator;
+    calcScreen.textContent += `(${newOperator}`;
+    unaryFlag = true;
+    }
+  } else if (pendingOperator == "") {
+    if (unaryFlag == true) calcScreen.textContent += ')'; // to show a closing parenthesis if unary was used
+    accumulator = currentNumber;
+    pendingOperator = newOperator;
+    calcScreen.textContent += " " + pendingOperator + " ";
+    currentNumber = "";
+    unaryFlag = false;
+  } else {
+    if (unaryFlag == true) calcScreen.textContent += ')';
+    accumulator = calculate(accumulator, pendingOperator, currentNumber);
+    pendingOperator = newOperator;
+    calcScreen.textContent += " " + pendingOperator + " ";
+    currentNumber = "";
+    unaryFlag = false;
   }
 }
 
 function handleSpecialButtons(button) {
-  var buttonContent = button.textContent;
-  if (buttonContent == '=') {
-    calcScreen.textContent = '';
-    operate();
-    leftOperand = '';
-    rightOperand = '';
-    operatorFlag = 0;
-  } else if (buttonContent == 'AC') {
-    leftOperand = '';
-    rightOperand = '';
-    operatorFlag = 0;
-    calcScreen.textContent = '';
+  const buttonContent = button.textContent;
+
+  if (buttonContent == "=") {
+    accumulator = calculate(accumulator, pendingOperator, currentNumber);
+    (accumulator == 'Infinity') ? calcScreen.textContent = 'MATH ERROR' : calcScreen.textContent = accumulator;
+    currentNumber = "";
+    pendingOperator = "";
+    accumulator = null;
+    unaryFlag = false;
+    decimalFlag = false;
+    resultFlag = true;
+  } else if (buttonContent == "AC") {
+    currentNumber = "";
+    pendingOperator = "";
+    accumulator = null;
+    unaryFlag = false;
+    decimalFlag = false;
+    calcScreen.textContent = "";
   }
 }
 
@@ -73,44 +91,33 @@ function handleEventListeners(event) {
   const button = event.target;
   if (!button.matches("button")) return;
 
-  if (button.classList.contains('numbers')) {
+  if (button.classList.contains("numbers")) {
     handleNumbers(button);
-  } else if (button.classList.contains('operators')) {
-    if (leftOperand == '') {
-      if (button.textContent == '-') {
-        handleOperators(button);
-      }
-    } else if (operatorFlag == 1 )  {
-      if (button.textContent == '-') {
-        handleOperators(button);
-      }
-    } else if (operatorFlag == 0) {
-        handleOperators(button);
-    }
+  } else if (button.classList.contains("operators")) {
+    handleOperators(button);
   } else {
     handleSpecialButtons(button);
   }
 }
 
-function operate() {
-  if (leftOperand != '' && rightOperand != '') {
-    switch (operator) {
-      case '+':
-        result = findSum(leftOperand, rightOperand);
+function calculate(accumulator, pendingOperator, currentNumber) {
+  if (pendingOperator != "" && currentNumber != "") {
+    switch (pendingOperator) {
+      case "+":
+        accumulator = findSum(accumulator, currentNumber);
         break;
-      case '-':
-        result = findDifference(leftOperand, rightOperand);
+      case "-":
+        accumulator = findDifference(accumulator, currentNumber);
         break;
-      case 'x':
-        result = findProduct(leftOperand, rightOperand);
+      case "x":
+        accumulator = findProduct(accumulator, currentNumber);
         break;
-      case '/':
-        result = findRatio(leftOperand, rightOperand);
+      case "/":
+        accumulator = findRatio(accumulator, currentNumber);
         break;
     }
-    calcScreen.textContent = result;
   } else {
-    calcScreen.textContent = 'SYNTAX ERROR';
+    calcScreen.textContent = "SYNTAX ERROR";
   }
-  return;
+  return accumulator;
 }

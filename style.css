@@ -1,9 +1,9 @@
 .light-theme {
-  --bg-image: url("images/light-theme-background.jpg");
-  --calc-bg: #FFF8F5;
-  --calc-border-color: rgba(248, 187, 217, 0.4);
-  --calc-shadow: 0 8px 32px rgba(244, 166, 205, 0.3), 0 2px 16px rgba(244, 166, 205, 0.2);
+  --general-bg-image: url("images/light-theme-background.jpg");
+  --general-border-color: rgba(248, 187, 217, 0.4);
+  --general-shadow: 0 8px 32px rgba(244, 166, 205, 0.3), 0 2px 16px rgba(244, 166, 205, 0.2);
   --general-font-color: #4A4A4A;
+  --general-bg-color: #FFF8F5;
 
   --cal-theme-switcher-icon: url("images/light-theme-cat.png");
   --cal-theme-switcher-width: 130px;
@@ -11,33 +11,33 @@
   --cal-theme-switcher-mWidth: 120px;
   --cal-theme-switcher-mHeight: 120px;
 
-  --screen-bg: #FFF0F5;
-  --screen-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
+  --first-bg: #FFF0F5;
+  --first-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
 
-  --number-bg: #F8BBD9;
-  --number-shadow: 0 6px 18px rgba(248, 187, 217, 0.6);
+  --second-bg: #F8BBD9;
+  --second-shadow: 0 6px 18px rgba(248, 187, 217, 0.6);
 
-  --operator-bg: #F8BBD9;
-  --operator-shadow: 0 6px 18px rgba(248, 187, 217, 0.6);
+  --third-bg: #F8BBD9;
+  --third-shadow: 0 6px 18px rgba(248, 187, 217, 0.6);
 
-  --special-buttons-bg: #D4A5A5;
-  --special-buttons-shadow: 0 6px 18px rgba(212, 165, 165, 0.6);
+  --fourth-bg: #D4A5A5;
+  --fourth-shadow: 0 6px 18px rgba(212, 165, 165, 0.6);
 
   --text-shadow: 0 2px 6px rgba(212, 165, 165, 0.6), 0 0 14px rgba(212, 165, 165, 0.5);
 
-  --equals-button-bg: #E91E63;
-  --equals-button-shadow: 0 6px 18px rgba(233, 30, 99, 0.6);
+  --fifth-bg: #E91E63;
+  --fifth-shadow: 0 6px 18px rgba(233, 30, 99, 0.6);
 
   --copyright-gradient: linear-gradient(90deg, #000000, #2b2b2b, #000000);
   --copyright-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
 }
 
 .dark-theme {
-  --bg-image: url("images/dark-theme-background.jpg");
-  --calc-bg: #1a1a1a;
-  --calc-border-color: rgba(255, 255, 255, 0.1);
-  --calc-shadow: 0 8px 32px rgba(255, 255, 255, 0.1), 0 2px 16px rgba(255, 255, 255, 0.05);
+  --general-bg-image: url("images/dark-theme-background.jpg");
+  --general-border-color: rgba(255, 255, 255, 0.1);
+  --general-shadow: 0 8px 32px rgba(255, 255, 255, 0.1), 0 2px 16px rgba(255, 255, 255, 0.05);
   --general-font-color: #ffffff;
+  --general-bg-color: #1a1a1a;
 
   --cal-theme-switcher-icon: url("images/dark-theme-cat.png");
   --cal-theme-switcher-width: 80px;
@@ -45,28 +45,28 @@
   --cal-theme-switcher-mWidth: 72px;
   --cal-theme-switcher-mHeight: 72px;
 
-  --screen-bg: #2a2a2a;
-  --screen-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+  --first-bg: #2a2a2a;
+  --first: inset 0 2px 8px rgba(0, 0, 0, 0.3);
 
-  --number-bg: #4a4a4a;
-  --number-shadow: 0 6px 18px rgba(255, 255, 255, 0.2);
+  --second-bg: #4a4a4a;
+  --second-shadow: 0 6px 18px rgba(255, 255, 255, 0.2);
 
-  --operator-bg: #5a5a5a;
-  --operator-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+  --third-bg: #5a5a5a;
+  --third-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
 
-  --special-buttons-bg: #3a3a3a;
-  --special-buttons-shadow: 0 6px 18px rgba(255, 255, 255, 0.15);
+  --fourth-bg: #3a3a3a;
+  --fourth-shadow: 0 6px 18px rgba(255, 255, 255, 0.15);
 
   --text-shadow: 0 2px 6px rgba(255, 255, 255, 0.15), 0 0 12px rgba(255, 255, 255, 0.2);
 
-  --equals-button-bg: #6a6a6a;
-  --equals-button-shadow: 0 6px 18px rgba(255, 255, 255, 0.25);
+  --fifth-bg: #6a6a6a;
+  --fifth-shadow: 0 6px 18px rgba(255, 255, 255, 0.25);
 
   --copyright-gradient: linear-gradient(90deg, #ffb6c1, #f48fb1);
   --copyright-shadow: 0 1px 3px rgba(244, 166, 205, 0.25);
 }
 
-
+/*>>> General Styles <<<*/
 * {
   margin: 0;
   padding: 0;
@@ -77,7 +77,7 @@
 
 ::-webkit-scrollbar { display: none; }
 
-body { background-image: var(--bg-image); }
+body { background-image: var(--general-bg-image); }
 
 main {
   width: 100%;
@@ -88,6 +88,7 @@ main {
   padding: 20px;
 }
 
+/*>>> Landing Page Styles <<<*/
 #lp-container {
   width: 750px;
   max-width: 90vw;
@@ -97,9 +98,9 @@ main {
   align-items: center;
   gap: 20px;
   padding: 10px 25px 25px 25px;
-  background-color: var(--calc-bg);
-  box-shadow: var(--calc-shadow);
-  border: 1px solid var(--calc-border-color);
+  background-color: var(--general-bg-color);
+  box-shadow: var(--general-shadow);
+  border: 1px solid var(--general-border-color);
   font-family: "Quicksand", sans-serif;
 }
 
@@ -109,7 +110,10 @@ h1 {
   margin-top: 15px;
 }
 
-h1, strong { text-shadow: var(--text-shadow); transition: box-shadow 0.2s ease; }
+h1, strong {
+  text-shadow: var(--text-shadow);
+  transition: box-shadow 0.2s ease;
+}
 
 p {
   text-align: center;
@@ -131,18 +135,19 @@ p {
 }
 
 #lp-theme-switcher {
-  background-color: var(--number-bg);
-  box-shadow: var(--special-buttons-shadow);
+  background-color: var(--second-bg);
+  box-shadow: var(--fourth-shadow);
 }
-
-#lp-theme-switcher:hover { box-shadow: var(--equals-button-shadow); transition: box-shadow 0.2s ease; }
 
 #redirect-to-cal {
-  background-color: var(--special-buttons-bg);
-  box-shadow: var(--special-buttons-shadow);
+  background-color: var(--fourth-bg);
+  box-shadow: var(--fourth-shadow);
 }
 
-#redirect-to-cal:hover { box-shadow: var(--equals-button-shadow); transition: box-shadow 0.2s ease; }
+#lp-theme-switcher:hover, #redirect-to-cal:hover {
+  box-shadow: var(--fifth-shadow);
+  transition: box-shadow 0.2s ease;
+}
 
 .lp-image {
   background-image: url(images/lp-cat-image.png);
@@ -165,6 +170,7 @@ p {
   transition: all 0.4s ease;
 }
 
+/*>>> Nekulator Styles <<<*/
 #cal-body {
   width: 400px;
   max-width: 90vw;
@@ -173,9 +179,9 @@ p {
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   padding: 10px 25px 25px 25px;
-  background-color: var(--calc-bg);
-  box-shadow: var(--calc-shadow);
-  border: 1px solid var(--calc-border-color);
+  background-color: var(--general-bg-color);
+  box-shadow: var(--general-shadow);
+  border: 1px solid var(--general-border-color);
 }
 
 .top-bar {
@@ -202,43 +208,18 @@ p {
   padding: 0;
 }
 
-@media (max-width: 480px) {
-  #cal-body {
-    width: 90vw;
-    gap: 15px;
-    padding: 0 20px 20px 20px;
-  }
-
-  .top-bar {
-    margin-top: 18px;
-    margin-bottom: 8px;
-  }
-
-  #cal-theme-switcher {
-    width: var(--cal-theme-switcher-mWidth);
-    height: var(--cal-theme-switcher-mHeight);
-  }
-}
-
 .screen {
   padding: 25px 30px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   grid-column: span 4;
-  background-color: var(--screen-bg);
+  background-color: var(--first-bg);
   margin-bottom: 25px;
   border-radius: 20px;
   font-size: 26px;
   font-weight: 600;
-  box-shadow: var(--screen-shadow);
-}
-
-@media (max-width: 480px) {
-  .screen {
-    padding: 20px 25px;
-    margin-bottom: 20px;
-  }
+  box-shadow: var(--first-shadow);
 }
 
 button {
@@ -252,51 +233,36 @@ button {
   transition: box-shadow 0.2s ease;
 }
 
-@media (max-width: 480px) {
-  button {
-    padding: 15px;
-    font-size: 14px;
-  }
-}
-
 .numbers {
-  background-color: var(--number-bg);
-  box-shadow: var(--number-shadow);
+  background-color: var(--second-bg);
+  box-shadow: var(--second-shadow);
 }
 
 .operators {
-  background-color: var(--operator-bg);
-  box-shadow: var(--operator-shadow);
+  background-color: var(--third-bg);
+  box-shadow: var(--third-shadow);
 }
 
 .special-buttons {
-  background-color: var(--special-buttons-bg);
-  box-shadow: var(--special-buttons-shadow);
+  background-color: var(--fourth-bg);
+  box-shadow: var(--fourth-shadow);
 }
 
 .equals-button {
   grid-column: span 2 !important;
-  background-color: var(--equals-button-bg);
+  background-color: var(--fifth-bg);
   max-width: none !important;
   max-height: none !important;
   border-radius: 80px;
   color: white;
   aspect-ratio: auto;
   padding: 10px 25px;
-  box-shadow: var(--special-buttons-shadow);
+  box-shadow: var(--fifth-shadow);
 }
 
+/*>>> Mobile Styles <<<*/
 @media (max-width: 480px) {
-  .equals-button {
-    padding: 15px 25px;
-  }
-}
-
-.hidden {
-  display: none;
-}
-
-@media (max-width: 480px) {
+  /*>> Landing Page Styles <<*/
   #lp-container {
     width: 94vw;
     padding: 14px 16px 20px;
@@ -346,4 +312,40 @@ button {
     margin-top: 10px;
     margin-bottom: 6px;
   }
+
+  /*>> Nekulator Styles <<*/
+  #cal-body {
+    width: 90vw;
+    gap: 15px;
+    padding: 0 20px 20px 20px;
+  }
+
+  .top-bar {
+    margin-top: 18px;
+    margin-bottom: 8px;
+  }
+
+  #cal-theme-switcher {
+    width: var(--cal-theme-switcher-mWidth);
+    height: var(--cal-theme-switcher-mHeight);
+  }
+
+  .screen {
+    padding: 20px 25px;
+    margin-bottom: 20px;
+  }
+
+  button {
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  .equals-button {
+    padding: 15px 25px;
+  }
+}
+
+/*>>> To be used to unhide the nekulator and hide landing page <<<*/
+.hidden {
+  display: none;
 }

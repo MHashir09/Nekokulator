@@ -11,6 +11,27 @@ Some unique features of Nekulator that makes it more unique than other javascrip
 - Arbitrary Amount Of Operators : Instead of only supporting a pair of operands and one operator (1 + 1), it supports arbitrary amount of operands and operators like (1 + 1 + 2...etc).
 - Different Themes : Nekulator also has 2 different themes. A light and a dark theme. To change themes on Nekulator, click the "Sleeping Cat" icon in the top center of the Nekulator. Also you can try changing theme to dark here also by clicking the "Change Current Theme" button below and vice versa.
 
+## Project Structure:
+
+<pre>
+   index.html 
+   style.css
+   script.js
+   README.md
+   images/
+      favicon.svg
+      lp-cat-image.png
+      light-theme-cat.png
+      dark-theme-cat.png
+      light-theme-background.jpg
+      dark-theme-background.jpg
+</pre>
+
+## Credits:
+
+This project's idea belongs to "The Odin Project". I am following their curriculum and made this project as part of their curriculum practice projects. The link to this project assignment by The Odin Project is:  [Link](https://www.theodinproject.com/lessons/foundations-calculator).
+ Also all the images used in this project are taken from pinterest.
+
 ---
 
 *I hope you enjoy this super simple calcu....Nekulator and star the repo if you like it ෆ˚₊*

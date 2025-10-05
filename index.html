@@ -1,43 +1,75 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Welcome !!</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+    <link href="style.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Nekokulator</title>
-  <link href="style.css" rel="stylesheet" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
-    rel="stylesheet">
-  <script src="script.js" defer></script>
-</head>
+  <body class="light-theme">
+    <main>
 
-<body>
-  <main>
-    <div id="cal-body">
-      <div class="screen">|</div>
-      <button class="special-buttons">AC</button>
-      <button class="special-buttons">DEL</button>
-      <button class="operators">%</button>
-      <button class="operators">/</button>
-      <button class="numbers">7</button>
-      <button class="numbers">8</button>
-      <button class="numbers">9</button>
-      <button class="operators">x</button>
-      <button class="numbers">6</button>
-      <button class="numbers">5</button>
-      <button class="numbers">4</button>
-      <button class="operators">-</button>
-      <button class="numbers">3</button>
-      <button class="numbers">2</button>
-      <button class="numbers">1</button>
-      <button class="operators">+</button>
-      <button class="numbers">0</button>
-      <button class="numbers">.</button>
-      <button class="equals-button">=</button>
-    </div>
-  </main>
-</body>
+      <section id="landing-page">
+        <div id="lp-container">
 
+          <h1>₊˚ʚ ᗢ₊˚✧ Nekulator ₊˚ʚ ᗢ₊˚✧</h1>
+          <p>
+            <b>Nekulator</b> is a cat theme based basic calculator with some cool features. The word "Nekulator" is derived from 2 words. One being a japanese word <b>"Neko"</b> which means <b>"Cat"</b> and the other being calculator. So them combined (neko+calculator) becomes <b>Nekulator</b>, I came up with this name myself hehehe. Some unique <b>features</b> of Nekulator that makes it more unique than other javascript based basic calculators are: <br> <strong><i>•₊˚ Divide by 0 ˚₊•</i></strong> <br> It can properly show <b>MATH ERROR</b> if you try to divide by 0. As dividing by 0 is one the first edge cases you tackle while making a calculator. <br> <strong><i>•₊˚ Unary Support ˚₊•</i></strong> <br> It properly supports unary <b>(+/-)</b> operators. Not only does it support it, it also displays them inside parenthesis like <b>(-1)</b> on Nekulator's screen providing better readability for users. <br> <strong><i>•₊˚ Arbitrary Amount Of Operators ˚₊•</i></strong> <br> Instead of only supporting a pair of operands and one operator (1 + 1), it supports <b>arbitrary amount</b> of operands and operators like (1 + 1 + 2...etc). <br> <strong><i>•₊˚ Different Themes ˚₊•</i></strong> <br> Nekulator also has 2 different themes. A <b>light</b> and a <b>dark</b> theme. To change themes on Nekulator, click the <b>"Sleeping Cat"</b> icon in the top center of the Nekulator. Also you can try changing theme to dark here also by clicking the <b>"Change Current Theme"</b> button below and vice versa. <br> I hope you enjoy this super simple <i>calcu....</i><b><i>Nekulator ෆ˚₊</i></b>
+          </p>
+
+          <div class="lp-buttons">
+            <button id="lp-theme-switcher" class="switch-theme">Change Current Theme</button>
+            <button id="redirect-to-cal">Redirect To Nekulator</button>
+          </div>
+
+          <div class="lp-image"></div>
+          <p class="copyright">₊˚ʚ © 2025 <span>ＭＨＩＡ</span> ɞ˚₊</p>
+
+        </div>
+      </section>
+
+      <section id="nekulator" class="hidden">
+        <div id="cal-body">
+
+          <div class="top-bar">
+            <button id="cal-theme-switcher" class="switch-theme"></button>
+          </div>
+          <div class="screen">|</div>
+
+          <button class="special-buttons">AC</button>
+          <button class="special-buttons">DEL</button>
+          <button class="operators">%</button>
+          <button class="operators">/</button>
+
+          <button class="numbers">7</button>
+          <button class="numbers">8</button>
+          <button class="numbers">9</button>
+          <button class="operators">x</button>
+
+          <button class="numbers">6</button>
+          <button class="numbers">5</button>
+          <button class="numbers">4</button>
+          <button class="operators">-</button>
+
+          <button class="numbers">3</button>
+          <button class="numbers">2</button>
+          <button class="numbers">1</button>
+          <button class="operators">+</button>
+
+          <button class="numbers">0</button>
+          <button class="numbers">.</button>
+          <button class="special-buttons equals-button">=</button>
+
+        </div>
+      </section>
+    </main>
+  </body>
 </html>
